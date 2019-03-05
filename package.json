@@ -1,0 +1,46 @@
+{
+  "name": "NodeAuth",
+  "version": "0.1.0",
+  "description": "",
+  "main": "api/server.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "convict": "^4.4.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.16.4",
+    "helmet": "^3.15.1",
+    "hoek": "^6.1.2",
+    "joi": "^14.3.1",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.1.13",
+    "newrelic": "^5.5.0",
+    "oauth2-server": "^3.0.1",
+    "redis": "^2.8.0",
+    "redis-commands": "^1.4.0",
+    "response-time": "^2.3.2",
+    "revalidator": "^0.3.1",
+    "serve-static": "^1.13.2"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.7",
+    "chai": "^4.2.0",
+    "eslint": "^5.14.1",
+    "hippie": "^0.5.2",
+    "mocha": "^6.0.2"
+  },
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js -V -e js",
+    "lint": "eslint . --cache --ignore-path .gitignore",
+    "fix": "eslint . --fix --cache --ignore-path .gitignore",
+    "doc": "apidoc -i api/routes/ -o api/static/doc",
+    "test": "mocha api/tests/**/*.js"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}

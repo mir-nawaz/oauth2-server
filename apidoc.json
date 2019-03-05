@@ -1,0 +1,12 @@
+{
+  "title": "Node Auth",
+  "description": "Node Auth Sample",
+  "version": "1.0.0",
+  "sampleUrl": "http://localhost:3004/",
+  "header": {
+    "title": "Avanza"
+  },
+  "footer": {
+    "title": "Avanza ©"
+  }
+}
