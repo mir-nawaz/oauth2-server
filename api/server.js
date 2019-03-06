@@ -6,6 +6,7 @@ const MongoModels = require('../lib/db/mongo');
 const redis = require('../lib/db/redis');
 const bootstrap = require('./bootstrap');
 const config = require('../config');
+const logger = require('../lib/logger')(__filename);
 
 const main = async function() {
   const connection = {
@@ -15,9 +16,9 @@ const main = async function() {
   await MongoModels.connect(connection, config.get('mongo.options'));
 
   if (redis.connected) {
-    console.log('redis connnected'); // eslint-disable-line
-    console.log('Models are now connected.'); // eslint-disable-line
-    console.log('Starting server.'); // eslint-disable-line
+    logger.info('[main] Redis connnected');
+    logger.info('[main] Models connected.');
+    logger.info('[main] Starting server.');
     bootstrap.app.start();
   }
 
@@ -29,9 +30,11 @@ main();
 let shutdown = () => {
   MongoModels.disconnect();
   bootstrap.app.stop(() => {
+    logger.error('[shutdowm] Server Stopped');
     process.exit();
   });
   setTimeout(function() {
+    logger.error('[shutdowm] Server Stopped');
     process.exit();
   }, 10000);
 };

@@ -12,6 +12,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const config = require('../../config');
+const log = require('../../lib/logger')(__filename);
 
 module.exports = class {
   static start() {
@@ -47,7 +48,8 @@ module.exports = class {
 
   static startHttpServer(app) {
     this.httpServer = app.listen(config.get('api.port'), function() {
-      console.log('start  ------------- on ', config.get('api.port'));// eslint-disable-line
+      log.error('[startHttpServer] Server Started at : ' + config.get('api.port'));
+      log.info('[startHttpServer] Server Started at : ' + config.get('api.port'));
     });
   }
 

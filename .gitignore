@@ -17,3 +17,6 @@ api/static
 
 .idea
 .vscode
+
+log
+!logs/.keep
