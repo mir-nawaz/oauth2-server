@@ -16,7 +16,7 @@ const main = async function() {
   await MongoModels.connect(connection, config.get('mongo.options'));
 
   if (redis.connected) {
-    logger.info('[main] Redis connnected');
+    logger.info('[main] Redis connected');
     logger.info('[main] Models connected.');
     logger.info('[main] Starting server.');
     bootstrap.app.start();
@@ -30,11 +30,11 @@ main();
 let shutdown = () => {
   MongoModels.disconnect();
   bootstrap.app.stop(() => {
-    logger.error('[shutdowm] Server Stopped');
+    logger.error('[shutdown] Server Stopped');
     process.exit();
   });
   setTimeout(function() {
-    logger.error('[shutdowm] Server Stopped');
+    logger.error('[shutdown] Server Stopped');
     process.exit();
   }, 10000);
 };

@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const responseTime = require('response-time');
+const responseTime = require('response-time')();
 const serveStatic = require('serve-static');
 const path = require('path');
 const routes = require('../routes');
@@ -12,6 +12,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const config = require('../../config');
+const addRequestId = require('express-request-id')();
 const log = require('../../lib/logger')(__filename);
 
 module.exports = class {
@@ -24,7 +25,8 @@ module.exports = class {
     app.use(helmet());
     app.use(helmet.noCache());
     app.use(cors());
-    app.use(responseTime());
+    app.use(responseTime);
+    app.use(addRequestId);
 
     app.use(serveStatic(path.resolve(__dirname, '../', 'static'), {}));
     app.set('views', path.resolve(__dirname, '../'));
@@ -48,7 +50,6 @@ module.exports = class {
 
   static startHttpServer(app) {
     this.httpServer = app.listen(config.get('api.port'), function() {
-      log.error('[startHttpServer] Server Started at : ' + config.get('api.port'));
       log.info('[startHttpServer] Server Started at : ' + config.get('api.port'));
     });
   }
